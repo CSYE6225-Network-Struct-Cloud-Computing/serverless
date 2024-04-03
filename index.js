@@ -78,7 +78,9 @@ functions.cloudEvent('helloPubSub', async cloudEvent => {
   // console.log("token : ", userDetails[0].token);
   // console.log("email_expiry : ", userDetails[0].email_expiry);
 
-  let verificationLink = 'http://' + process.env.domain + ':' + process.env.portapp + '/v1/user/email?token=' + userDetails[0].token;
+  // let verificationLink = 'http://' + process.env.domain + ':' + process.env.portapp + '/v1/user/email?token=' + userDetails[0].token;
+
+  let verificationLink = 'https://' + process.env.domain + '/v1/user/email?token=' + userDetails[0].token;
 
   const htmlBody = `
         <p>Hello ${userDetails[0].first_name} ${userDetails[0].last_name},</p>
