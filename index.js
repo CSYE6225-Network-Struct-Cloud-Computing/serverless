@@ -17,7 +17,7 @@ const createTcpPool = async config => {
   return mysql.createPool(dbConfig);
 };
 
-async function getAllUserData() { // No need to pass dbConfig as a parameter
+async function getAllUserData() { 
   try {
     const pool = await createTcpPool();
     console.log("Pool", pool);
@@ -29,7 +29,7 @@ async function getAllUserData() { // No need to pass dbConfig as a parameter
   }
 }
 
-async function getUserDetails(username) { // No need to pass dbConfig as a parameter
+async function getUserDetails(username) { 
   try {
     const pool = await createTcpPool();
     console.log("Pool", pool);
@@ -47,7 +47,7 @@ async function updateUser(username) {
   try {
     const pool = await createTcpPool();
     const token = Math.random().toString(36).slice(-10);
-    const emailExpiry = new Date(Date.now() + 2 * 60 * 1000); // Two minutes from now
+    const emailExpiry = new Date(Date.now() + 2 * 60 * 1000); 
     console.log(username);
     const updateQuery = `
       UPDATE Users
@@ -72,11 +72,6 @@ functions.cloudEvent('helloPubSub', async cloudEvent => {
   await updateUser(jsonData.username);
 
   let userDetails = await getUserDetails(jsonData.username);
-  // console.log("user Details ----- ", userDetails);
-  // console.log("fname : ", userDetails[0].first_name);
-  // console.log("fname : ", userDetails[0].last_name);
-  // console.log("token : ", userDetails[0].token);
-  // console.log("email_expiry : ", userDetails[0].email_expiry);
 
   // let verificationLink = 'http://' + process.env.domain + ':' + process.env.portapp + '/v1/user/email?token=' + userDetails[0].token;
 
@@ -101,5 +96,5 @@ functions.cloudEvent('helloPubSub', async cloudEvent => {
     .then(msg => console.log("Email sent:", msg))
     .catch(err => console.error("Error sending email:", err));
 
-  console.log(`Hello, ${name}!`);
+  console.log(`Mail Sent to , ${name}!`);
 });
